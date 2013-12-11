@@ -67,7 +67,31 @@ except ImportError:
 
 
 # Supported tools (executable names)
-tools = ['ffmpeg', 'avconv']
+tools = ['ffmpeg', 'avconv', 'vlc']
+
+"""
+--- research for VLC tool support
+
+Command to open and show current desktop:
+
+  $ cvlc screen:// 
+  
+[ ] find out how to set FPS
+[ ] find out how to show FPS
+[ ] find how to redirect (or tee) stream to file
+  
+Debug Output from GUI after clicking to save screen:// stream to file:
+
+  qt4 debug: MRL passed to the Sout: screen://
+  qt4 warning: Transcode MRL: sout=#transcode{vcodec=VP80,vb=2000,scale=0,acodec=vorb,ab=128,channels=2,samplerate=44100}:std{access=file,mux=webm,dst='test.webm'}
+  qt4 debug: Adding option: screen-fps=15.000000
+  qt4 debug: Adding option: live-caching=300
+  qt4 debug: Adding option: sout=#transcode{vcodec=VP80,vb=2000,scale=0,acodec=vorb,ab=128,channels=2,samplerate=44100}:std{access=file,mux=webm,dst='test.webm'}
+  main debug: adding item `Streaming' ( screen:// )
+  main debug: rebuilding array of current - root Playlist
+  
+http://www.videolan.org/doc/streaming-howto/en/ch04.html
+"""
 
 # Video codec lines
 vcodecs = {}
