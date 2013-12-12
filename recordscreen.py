@@ -100,7 +100,10 @@ Command to open and show current desktop:
       Video:          
         --sout-transcode-fps=<float>  Video frame-rate
         
-[ ] find out how to show FPS
+  $ vlc screen:// :screen-fps=15
+        
+[x] find out how to show FPS
+    . impossible in 2.1.x ()
 [ ] find how to redirect (or tee) stream to file
   
 Debug Output from GUI after clicking to save screen:// stream to file:
