@@ -74,9 +74,32 @@ tools = ['ffmpeg', 'avconv', 'vlc']
 
 Command to open and show current desktop:
 
-  $ cvlc screen:// 
+  $ vlc screen:// 
   
-[ ] find out how to set FPS
+[x] find out how to set FPS
+    . from https://wiki.videolan.org/VLC_command-line_help/
+    Screen Input
+      --screen-fps=<float>       Frame rate
+          Desired frame rate for the capture.
+      --screen-top=<integer [-2147483648 .. 2147483647]>
+      --screen-left=<integer [-2147483648 .. 2147483647]>
+      --screen-width=<integer [-2147483648 .. 2147483647]>
+      --screen-height=<integer [-2147483648 .. 2147483647]>
+      --screen-follow-mouse, --no-screen-follow-mouse
+                                 Follow the mouse (default disabled)
+          Follow the mouse when capturing a subscreen.
+      --screen-mouse-image=<string>
+                                 Mouse pointer image
+          If specified, will use the image to draw the mouse pointer on the
+          capture.
+      --screen-fragment-size=<integer [-2147483648 .. 2147483647]>
+                                 Capture fragment size
+          Optimize the capture by fragmenting the screen in chunks of
+          predefined height (16 might be a good value, and 0 means disabled).
+    Transcode stream output
+      Video:          
+        --sout-transcode-fps=<float>  Video frame-rate
+        
 [ ] find out how to show FPS
 [ ] find how to redirect (or tee) stream to file
   
