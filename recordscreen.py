@@ -66,8 +66,30 @@ except ImportError:
     have_multiproc = False
 
 
-# Supported tools (executable names)
-tools = ['ffmpeg', 'avconv']
+class Tool(object):
+    """
+    Describe capabilitity of a single screen capture tool
+    """
+    name = None
+    executable = None
+
+    def __init__(self, name, executable=None):
+        self.name = name
+        self.executable = executable
+        if not self.executable:
+            self.executable = self.name
+
+    def __str__(self):
+        return self.name
+
+
+# Supported tools
+ffmpeg = Tool('ffmpeg')
+avconv = Tool('avconv')
+
+tools = [ffmpeg, avconv]
+toolstr = ", ".join(map(str, tools))
+
 
 # Video codec lines
 vcodecs = {}
@@ -332,7 +354,7 @@ if __name__ == "__main__":
                            "Specified by file extension.  Default: " + DEFAULT_FILE_EXTENSION)
     parser.add_option("--tool", dest="tool",
                       help="capture and conversion tool to use (autodetected by default)." +
-                           "  Supported %s." % ", ".join(tools))
+                           "  Supported %s." % toolstr)
 
     opts, args = parser.parse_args()
 
@@ -349,12 +371,12 @@ if __name__ == "__main__":
     # Autodetect tool if not requested
     else:
         for tool in tools:
-           if check_tool(tool):
+           if check_tool(tool.executable):
                TOOL = tool
                break
         else:
             print("No supported capture/convertion tool found, try")
-            print("to install one of: " + ', '.join(tools))
+            print("to install one of: " + toolstr)
             exit(-1)
 
     print("Using '%s' tool for capture and conversion." % TOOL)
@@ -459,7 +481,7 @@ if __name__ == "__main__":
         parser.error("specified capture area is off screen.")
 
     # Capture!
-    cmd = [TOOL]
+    cmd = [TOOL.executable]
     if not opts.no_audio:
         cmd += capture_line(fps, x, y, width, height, opts.display_device, opts.audio_device, vcodec, acodec, outfile)
     else:
