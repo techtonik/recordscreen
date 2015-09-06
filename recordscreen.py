@@ -82,6 +82,9 @@ class Tool(object):
     def __str__(self):
         return self.name
 
+    def get_command_line(self):
+        return [self.executable]
+
 
 # Supported tools
 ffmpeg = Tool('ffmpeg')
@@ -481,7 +484,7 @@ if __name__ == "__main__":
         parser.error("specified capture area is off screen.")
 
     # Capture!
-    cmd = [TOOL.executable]
+    cmd = [TOOL.get_command_line()]
     if not opts.no_audio:
         cmd += capture_line(fps, x, y, width, height, opts.display_device, opts.audio_device, vcodec, acodec, outfile)
     else:
